@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Pixel';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+}
+
+body {
+    text-align: center;
+    font-family: Pixel;
+    background: #f3f3f3;
+    image-rendering: pixelated;
+}
+
+.title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 20px 30px;
+}
+
+.card {
+    width: 250px;
+    border: 3px solid #000;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.card-locked {
+    background: #ddd;
+    opacity: 0.6;
+}
+
+.card-cat {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.card-name {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.card-rarity {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.card-status {
+    font-size: 12px;
+}
+
+/* 등급 색상 */
+.rarity-common {
+    color: #555;
+}
+
+.rarity-uncommon {
+    color: #2ecc71;
+}
+
+.rarity-rare {
+    color: #3498db;
+}
+
+.rarity-epic {
+    color: #9b59b6;
+}
+
+.rarity-legendary {
+    color: #f1c40f;
+}
+
+.pixel-btn {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background: #d0d0d0;
+    border: 3px solid #000;
+    cursor: pointer;
+    font-family: Pixel;
+}

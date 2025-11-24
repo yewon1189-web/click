@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./src/style.css">
+    <script src="https://click-battle-6ff11.web.app/click-battle.js"></script>
+    <title>Title</title>
+</head>
+
+<body>
+
+
+    <h1 class="title">🐱 Pixel Cat Collector</h1>
+
+    <div id="cat-wrap">
+        <div id="cat" class="pixel-cat">ฅ^•ﻌ•^ฅ</div>
+        <div id="bubble" class="bubble">나를 쓰다듬으라옹</div>
+    </div>
+
+    <div id="fur" class="pixel-box">☁️: 0개</div>
+
+    <div id="btn-wrap">
+        <button id="gacha" class="pixel-btn">🎰 뽑기 (100 ☁️)</button>
+        <button id="room-btn" class="pixel-btn">🏠 고양이 방</button>
+        <button id="book-btn" class="pixel-btn">📖 도감</button>
+    </div>
+
+    <!-- 뽑기 팝업 -->
+    <div id="gacha-popup" class="popup">
+        <div class="popup-content">
+            <div id="popup-rarity" class="popup-rarity"></div>
+            <div id="popup-cat" class="popup-cat"></div>
+            <div id="popup-name" class="popup-name"></div>
+            <button id="popup-close" class="pixel-btn">확인</button>
+        </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+@font-face {
+    font-family: 'Pixel';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+}
+
+/* 전체 스타일 기본값 */
+html,
+body {
+    overflow: hidden;
+    /* ★ 스크롤 완전 차단 */
+    height: 100%;
+}
+
+body {
+    text-align: center;
+    font-family: Pixel;
+    background: #f3f3f3;
+    user-select: none;
+    image-rendering: pixelated;
+    -webkit-tap-highlight-color: transparent;
+    /* 모바일 터치 하이라이트 제거 */
+}
+
+/* 포커스 파란 박스 제거 */
+*:focus {
+    outline: none !important;
+}
+
+.title {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 32px;
+}
+
+/* 메인 고양이 영역 */
+#cat-wrap {
+    margin-top: 80px;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+    height: 180px;
+    /* ★ 고양이 절대 안 짤리도록 부모 높이 고정 */
+}
+
+/* 고양이 자동 크기 조절 (반응형 + 상한 제한) */
+.pixel-cat {
+    font-size: min(18vw, 80px);
+    /* ★ 약간 작게 & 반응형 */
+    line-height: 1.25;
+    /* ★ 활발냥 전용 세로 공간 확보 */
+    display: inline-flex;
+    align-items: center;
+    /* ★ 정확하게 수직 정렬 */
+    justify-content: center;
+}
+
+/* 고양이 클릭 애니메이션 */
+.cat-pop {
+    animation: catPop 0.18s ease-out;
+}
+
+@keyframes catPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 말풍선 */
+.bubble {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    /* ★ 고양이 높이에 자동 맞춤 */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 15px;
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 10px;
+    z-index: 2;
+    font-size: 18px;
+    transition: opacity 0.4s;
+    white-space: nowrap;
+}
+
+/* 말풍선 꼬리 (역삼각형) */
+.bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+    filter: drop-shadow(0 -3px 0 #000);
+}
+
+/* 털 카운트 박스 */
+.pixel-box {
+    padding: 12px 20px;
+    border: 3px solid #000;
+    background: #fff;
+    display: inline-block;
+    margin-bottom: 50px;
+    font-size: 20px;
+    margin-top: -40px;
+}
+
+/* 버튼 영역 */
+#btn-wrap {
+    margin-top: 0px;
+    /* ★ 버튼 아주 아래로 */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.pixel-btn {
+    width: 220px;
+    padding: 14px 20px;
+    background: #d0d0d0;
+    border: 3px solid #000;
+    cursor: pointer;
+    font-family: Pixel;
+    transition: 0.1s;
+}
+
+.pixel-btn.active {
+    background: #fff;
+}
+
+.pixel-btn:active {
+    background: #bcbcbc;
+}
+
+/* 곡선으로 날아가는 털 */
+.fur-puff {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* 팝업 전체 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    /* 기본은 숨김 */
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 0;
+    /* ★ 고양이 짤림 방지 */
+}
+
+/* 팝업 박스 */
+.popup-content {
+    background: #fff;
+    border: 4px solid #000;
+    padding: 20px;
+    width: 260px;
+    border-radius: 10px;
+    text-align: center;
+
+    overflow: visible;
+    /* ★ 팝업 안 고양이 절대 안 짤림 */
+}
+
+/* 팝업 고양이 */
+.popup-cat {
+    font-size: 65px;
+    /* 활발냥도 안 짤리는 크기 */
+    margin: 10px 0;
+    line-height: 1.1;
+}
+
+/* 팝업 텍스트 */
+.popup-rarity {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.popup-name {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* 등급 색 */
+.rarity-common {
+    color: #555;
+}
+
+.rarity-uncommon {
+    color: #2ecc71;
+}
+
+.rarity-rare {
+    color: #3498db;
+}
+
+.rarity-epic {
+    color: #9b59b6;
+}
+
+.rarity-legendary {
+    color: #f1c40f;
+}
