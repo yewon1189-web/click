@@ -1,6 +1,11 @@
+/*******************************
+ *   CLICKING CAT MAIN SCRIPT
+ *******************************/
+
 // ClickBattle 초기화
 ClickBattle.init("YEWON");
 
+// 변수들
 let fur = 0;
 
 const cat = document.getElementById("cat");
@@ -10,7 +15,7 @@ const roomBtn = document.getElementById("room-btn");
 const bookBtn = document.getElementById("book-btn");
 const bubble = document.getElementById("bubble");
 
-/* === 뽑기 팝업 요소 === */
+/* === 뽑기 팝업 === */
 const popup = document.getElementById("gacha-popup");
 const popupCat = document.getElementById("popup-cat");
 const popupRarity = document.getElementById("popup-rarity");
@@ -37,7 +42,7 @@ const cats = [
         line: "야옹"
     },
     {
-        emoji: "ฅ(・ω・ฅ)",   // ★ 변경된 활발냥
+        emoji: "ฅ(・ω・ฅ)",   // ★ 활발냥
         name: "활발냥",
         rate: 15,
         rarity: "Rare",
@@ -62,14 +67,14 @@ const cats = [
     }
 ];
 
-/* 대표 고양이 */
+/* === 현재 대표 고양이 === */
 let mainCat = localStorage.getItem("mainCat") || "ฅ^•ﻌ•^ฅ";
 cat.textContent = mainCat;
 
-/* 보유 고양이 Set */
+/* === 보유 고양이 === */
 let owned = new Set(JSON.parse(localStorage.getItem("cats") || "[]"));
 
-/* 말풍선 */
+/* === 말풍선 === */
 function showDialogue(text) {
     bubble.textContent = text;
     bubble.style.display = "block";
@@ -81,17 +86,17 @@ function showDialogue(text) {
     }, 2500);
 }
 
-/* 첫 멘트 */
+/* 첫 등장 멘트 */
 const firstData = cats.find(c => c.emoji === mainCat) || cats[0];
 showDialogue(firstData.firstLine ?? firstData.line);
 
-/* 뽑기 버튼 활성화 */
+/* === Gacha 버튼 상태 === */
 function updateGachaButton() {
-    if (fur >= 100) gacha.classList.add("active");
+    if (fur >= 50) gacha.classList.add("active");   // ★ 100 → 50
     else gacha.classList.remove("active");
 }
 
-/* 곡선으로 날아가는 털 */
+/* === 곡선 털 드랍 === */
 function spawnCurvedFur(startX, startY) {
     const puff = document.createElement("div");
     puff.className = "fur-puff";
@@ -127,12 +132,11 @@ function spawnCurvedFur(startX, startY) {
     requestAnimationFrame(animate);
 }
 
-/* 스마트 터치/클릭 방지 */
+/* === 스마트 클릭 === */
 let lastTouchTime = 0;
 function smartClick(handler) {
     return function (e) {
         const now = Date.now();
-
         if (e.type === "click" && now - lastTouchTime < 400) return;
         if (e.type === "touchstart") lastTouchTime = now;
 
@@ -140,9 +144,10 @@ function smartClick(handler) {
     };
 }
 
-/* 고양이 클릭 */
+/***********************
+ *     메인 고양이 클릭
+ ***********************/
 function handleCatTouch(e) {
-    // 퐁! 팝 애니메이션
     cat.classList.add("cat-pop");
     setTimeout(() => cat.classList.remove("cat-pop"), 180);
 
@@ -153,7 +158,7 @@ function handleCatTouch(e) {
     const y = touch.clientY;
 
     fur++;
-    furEl.textContent = `☁️ : ${fur}개`;
+    furEl.textContent = `☁️ 털: ${fur}개`;
     updateGachaButton();
 
     spawnCurvedFur(x, y);
@@ -162,7 +167,9 @@ function handleCatTouch(e) {
 cat.addEventListener("touchstart", smartClick(handleCatTouch));
 cat.addEventListener("click", smartClick(handleCatTouch));
 
-/* 팝업 */
+/***********************
+ *        Popup
+ ***********************/
 popupClose.onclick = popupClose.ontouchstart = () => {
     popup.style.display = "none";
 };
@@ -179,15 +186,23 @@ function showGachaPopup(catData, isFirst) {
     popup.style.display = "flex";
 }
 
-/* === 뽑기 === */
+/***********************
+ *         뽑기
+ ***********************/
 function handleGacha() {
-    if (fur < 100) return alert("☁️ 털이 부족하다옹!");
+
+    if (fur < 50) return alert("☁️ 털이 부족하다옹!");   // ★ 100 → 50
 
     ClickBattle.recordClick();
 
-    fur -= 100;
-    furEl.textContent = `☁️ : ${fur}개`;
+    fur -= 50;                                             // ★ 100 → 50
+    furEl.textContent = `☁️ 털: ${fur}개`;
     updateGachaButton();
+
+    /* 뽑기 누르면 모든 버튼 active */
+    document.querySelectorAll(".pixel-btn").forEach(btn => {
+        btn.classList.add("active");
+    });
 
     let rand = Math.random() * 100;
     let sum = 0;
@@ -218,11 +233,12 @@ function handleGacha() {
 gacha.addEventListener("touchstart", smartClick(handleGacha));
 gacha.addEventListener("click", smartClick(handleGacha));
 
-/* 방 이동 */
+/***********************
+ *  이동 / 도감 버튼
+ ***********************/
 roomBtn.addEventListener("touchstart", smartClick(() => location.href = "room.html"));
 roomBtn.addEventListener("click", smartClick(() => location.href = "room.html"));
 
-/* 도감 이동 */
 bookBtn.addEventListener("touchstart", smartClick(() => location.href = "book.html"));
 bookBtn.addEventListener("click", smartClick(() => location.href = "book.html"));
 
