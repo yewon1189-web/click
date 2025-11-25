@@ -3,7 +3,7 @@
  *****************************************/
 
 // ClickBattle 초기화
-ClickBattle.init("YEWON");
+ClickBattle.init("YEWON1");
 
 const room = document.getElementById("room");
 const back = document.getElementById("back");
