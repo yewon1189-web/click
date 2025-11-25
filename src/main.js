@@ -3,7 +3,7 @@
  *******************************/
 
 // ClickBattle 초기화
-ClickBattle.init("YEWON1");
+ClickBattle.init("리자드");
 
 // 변수들
 let fur = 0;
