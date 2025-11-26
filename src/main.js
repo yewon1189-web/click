@@ -3,7 +3,7 @@
  *******************************/
 
 // ClickBattle 초기화
-ClickBattle.init("yewon");
+
 
 // 변수들
 let fur = 0;
@@ -151,7 +151,7 @@ function handleCatTouch(e) {
     cat.classList.add("cat-pop");
     setTimeout(() => cat.classList.remove("cat-pop"), 180);
 
-    ClickBattle.recordClick();
+
 
     const touch = e.touches ? e.touches[0] : e;
     const x = touch.clientX;
@@ -193,7 +193,7 @@ function handleGacha() {
 
     if (fur < 50) return alert("☁️ 털이 부족하다옹!");   // ★ 100 → 50
 
-    ClickBattle.recordClick();
+
 
     fur -= 50;                                             // ★ 100 → 50
     furEl.textContent = `☁️ 털: ${fur}개`;
