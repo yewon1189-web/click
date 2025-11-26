@@ -36,7 +36,7 @@ owned.forEach(emoji => {
 
     /* === 클릭(터치)하면 하트 + 기록 === */
     function handleTouch(e) {
-        ClickBattle.recordClick(); // 클릭 기록
+
 
         // ★ 고양이 퐁! 애니메이션
         c.classList.add("room-cat-pop");
