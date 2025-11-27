@@ -3,11 +3,13 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
 }
 
-/* 전체 스타일 기본값 */
+/* -----------------------------------
+   기본 스타일
+----------------------------------- */
 html,
 body {
     overflow: hidden;
-    /* ★ 스크롤 완전 차단 */
+    /* 스크롤 차단 */
     height: 100%;
 }
 
@@ -15,42 +17,52 @@ body {
     text-align: center;
     font-family: Pixel;
     background: #f3f3f3;
-    user-select: none;
     image-rendering: pixelated;
     -webkit-tap-highlight-color: transparent;
-    /* 모바일 터치 하이라이트 제거 */
+    /* 모바일 클릭 반짝임 제거 */
+    user-select: none;
 }
 
-/* 포커스 파란 박스 제거 */
+/* 포커스 파란 테두리 제거 */
 *:focus {
     outline: none !important;
 }
 
+/* 텍스트 선택 금지 */
+body,
+div,
+button {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* -----------------------------------
+   제목
+----------------------------------- */
 .title {
     margin-top: 20px;
     margin-bottom: 50px;
     font-size: 32px;
 }
 
-/* 메인 고양이 영역 */
+/* -----------------------------------
+   메인 고양이 영역
+----------------------------------- */
 #cat-wrap {
     margin-top: 80px;
     margin-bottom: 60px;
     position: relative;
     display: inline-block;
-    height: 180px;
-    /* ★ 고양이 절대 안 짤리도록 부모 높이 고정 */
+    height: 120px;
+    /* 고양이 절대 안 짤리도록 */
 }
 
-/* 고양이 자동 크기 조절 (반응형 + 상한 제한) */
 .pixel-cat {
     font-size: min(18vw, 80px);
-    /* ★ 약간 작게 & 반응형 */
     line-height: 1.25;
-    /* ★ 활발냥 전용 세로 공간 확보 */
     display: inline-flex;
     align-items: center;
-    /* ★ 정확하게 수직 정렬 */
     justify-content: center;
 }
 
@@ -73,57 +85,72 @@ body {
     }
 }
 
-/* 말풍선 */
+/* -----------------------------------
+   말풍선
+----------------------------------- */
 .bubble {
     position: absolute;
     bottom: calc(100% + 15px);
-    /* ★ 고양이 높이에 자동 맞춤 */
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 15px;
     background: #fff;
     border: 3px solid #000;
     border-radius: 10px;
-    z-index: 2;
     font-size: 18px;
+    z-index: 2000;
+
     transition: opacity 0.4s;
-    white-space: nowrap;
+    white-space: normal;
+    /* ★ 자동 줄바꿈 허용 */
+    word-break: keep-all;
 }
 
-/* 말풍선 꼬리 (역삼각형) */
 .bubble::after {
     content: "";
     position: absolute;
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 0;
-    height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid #fff;
     filter: drop-shadow(0 -3px 0 #000);
 }
 
-/* 털 카운트 박스 */
-.pixel-box {
-    padding: 12px 20px;
-    border: 3px solid #000;
-    background: #fff;
-    display: inline-block;
-    margin-bottom: 50px;
-    font-size: 20px;
-    margin-top: -40px;
+/* 튜토리얼 모드에서 말풍선 맨 위로 */
+#bubble.tutorial-top {
+    z-index: 3000;
 }
 
-/* 버튼 영역 */
+/* -----------------------------------
+   털 카운트 박스
+----------------------------------- */
+.pixel-box {
+    position: absolute;
+    top: calc(100% + 1px);
+    /* 고양이 아래 10px */
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 10px 18px;
+    border: 3px solid #000;
+    background: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* -----------------------------------
+   버튼 영역
+----------------------------------- */
 #btn-wrap {
-    margin-top: 0px;
-    /* ★ 버튼 아주 아래로 */
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
+    gap: 15px;
+    margin-top: 100px;
 }
 
 .pixel-btn {
@@ -144,7 +171,9 @@ body {
     background: #bcbcbc;
 }
 
-/* 곡선으로 날아가는 털 */
+/* -----------------------------------
+   털 파티클
+----------------------------------- */
 .fur-puff {
     position: fixed;
     font-size: 24px;
@@ -152,7 +181,9 @@ body {
     z-index: 5;
 }
 
-/* 팝업 전체 */
+/* -----------------------------------
+   팝업
+----------------------------------- */
 .popup {
     position: fixed;
     top: 0;
@@ -160,15 +191,15 @@ body {
     width: 100%;
     height: 100%;
     display: none;
-    /* 기본은 숨김 */
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
+    /* 흐림 효과 제거 */
     padding: 20px 0;
-    /* ★ 고양이 짤림 방지 */
+    z-index: 11;
+    white-space: nowrap;
 }
 
-/* 팝업 박스 */
 .popup-content {
     background: #fff;
     border: 4px solid #000;
@@ -177,19 +208,26 @@ body {
     border-radius: 10px;
     text-align: center;
 
-    overflow: visible;
-    /* ★ 팝업 안 고양이 절대 안 짤림 */
+    display: flex;
+    /* 중앙 정렬 */
+    flex-direction: column;
+    /* 세로로 쌓기 */
+    align-items: center;
+    /* 가로 중앙 */
+    justify-content: center;
+    /* 세로 중앙 */
+
+    gap: 15px;
+    /* 버튼 간격 */
 }
 
-/* 팝업 고양이 */
+
 .popup-cat {
     font-size: 65px;
-    /* 활발냥도 안 짤리는 크기 */
-    margin: 10px 0;
     line-height: 1.1;
+    margin: 10px 0;
 }
 
-/* 팝업 텍스트 */
 .popup-rarity {
     font-size: 20px;
     margin-bottom: 5px;
@@ -219,4 +257,48 @@ body {
 
 .rarity-legendary {
     color: #f1c40f;
+}
+
+/* -----------------------------------
+   튜토리얼 오버레이 (흐림 제거)
+----------------------------------- */
+#tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.6);
+    /* 흐림 X */
+    z-index: 999;
+    display: none;
+}
+
+/* 상냥냥 강조 (흔들림) */
+#cat.tutorial-highlight {
+    position: relative;
+    z-index: 1000;
+    animation: cat-shake 0.5s infinite ease-in-out;
+}
+
+@keyframes cat-shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
