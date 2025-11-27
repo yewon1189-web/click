@@ -128,7 +128,7 @@ button {
 ----------------------------------- */
 .pixel-box {
     position: absolute;
-    top: calc(100% + 1px);
+    top: calc(100% + 10px);
     /* 고양이 아래 10px */
     left: 50%;
     transform: translateX(-50%);
